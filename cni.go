@@ -173,7 +173,7 @@ func (c *libcni) Networks() []*Network {
 
 // Setup setups the network in the namespace and returns a Result
 func (c *libcni) Setup(ctx context.Context, id string, path string, opts ...NamespaceOpts) (*Result, error) {
-	ctx, span := tracer().Start(ctx, "cni.Setup",
+	ctx, span := tracer().Start(ctx, "cni.Setup", // starting new span as a child of the callers current span in ctx
 		trace.WithAttributes(
 			attribute.String("cni.id", id),
 			attribute.String("cni.path", path),
